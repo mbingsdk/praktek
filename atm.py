@@ -9,6 +9,7 @@ import random
 namaATM = "ATM BRO Bersarang"
 
 #Database
+#database = livejson.File('dataATM.json', True, False, 4)
 database = {
     "dataRekening":{
         "123456":{
