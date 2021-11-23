@@ -3,7 +3,7 @@ KONSEP PROGRAM APLIKASI ATM
 """
 
 #Module
-import random, livejson
+#import random, livejson
 import random
 
 #Nama ATM
