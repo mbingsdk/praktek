@@ -2,6 +2,10 @@
 KONSEP PROGRAM APLIKASI ATM
 """
 
+#Module
+import random
+
+#Nama ATM
 namaATM = "ATM BRO Bersarang"
 
 #Database
@@ -12,6 +16,12 @@ database = {
             "rek":"12341234",
             "pin":"123456",
             "saldo":20000000
+        },
+        "654321":{
+            "nama":"SYAHRIL",
+            "rek":"66667777",
+            "pin":"654321",
+            "saldo":55000000
         }
     }
 }
@@ -40,7 +50,7 @@ def menu(dataUser):
     jumlahMenu = len(m)
     for i in range(jumlahMenu):
         print(i, m[i])
-    opsi = input("Pilih nomor urut: ")
+    opsi = int(input("Pilih nomor urut: "))
     if opsi == 0:
         transfer(dataUser)
     elif opsi == 1:
@@ -54,7 +64,7 @@ def menu(dataUser):
     elif opsi == 5:
         exit()
     else:
-        menu(dataUser)
+        login()
 
 #Transfer
 def transfer(dataUser):
@@ -67,20 +77,23 @@ def transfer(dataUser):
             break
         else:
             pass
-    nominal = input("Masukkan jumlah yang mau dikirim: ")
-    if database["dataRekening"][dataUser["pin"]]["saldo"] >= nominal:
-        database["dataRekening"][pin]["saldo"] += nominal
-        database["dataRekening"][dataUser["pin"]]["saldo"] -= nominal
-        print("Transfer berhasil!")
-        print("Semoga uangnya bukan hasil korupsi!")
+    if pin != "":
+        nominal = int(input("Masukkan jumlah yang mau dikirim: "))
+        if database["dataRekening"][dataUser["pin"]]["saldo"] >= nominal:
+            database["dataRekening"][pin]["saldo"] += nominal
+            database["dataRekening"][dataUser["pin"]]["saldo"] -= nominal
+            print("Transfer berhasil!")
+            print("Semoga uangnya bukan hasil korupsi!")
+        else:
+            print("Periksa saldomu dulu bos!")
+            transfer(dataUser)
     else:
-        print("Periksa saldomu dulu bos!")
-        transfer(dataUser)
+        print("Nomor rekening tidak terdaftar")
 
 #Penarikan
 def penarikan(dataUser):
     print()
-    n = input("Mau minta berapa: ")
+    n = int(input("Mau minta berapa: "))
     if database["dataRekening"][dataUser["pin"]]["saldo"] >= n:
         print("krik krik kriuk dumplak dumlpak byuoar")
         print("Jangan lupa trakir bos!")
@@ -92,7 +105,7 @@ def penarikan(dataUser):
 #Setor Tunai
 def setor(dataUser):
     print()
-    n = input("Jumlah yang setor: ")
+    n = int(input("Jumlah yang setor: "))
     database["dataRekening"][dataUser["pin"]]["saldo"] += n
     print("Sudah Bos!!")
 
@@ -105,8 +118,35 @@ def saldo(dataUser):
 
 #Registrasi
 def reg(dataUser):
-    pass
+    print()
+    print("-----FORM REGISTRASI-----")
+    nama = input("Nama Lengkap: ")
+    kodePin = input("Kode PIN 6 digit: ")
+    if kodePin not in list(database["dataRekening"]):
+        c = input("Konfirmasi Kode PIN: ")
+        if c == kodePin and len(kodePin) == 6:
+            rek = str(random.randint(10000000, 99999999))
+            database["dataRekening"][c] = {
+                "nama":nama,
+                "rek":rek,
+                "pin":c,
+                "saldo":0
+            }
+            print("Masukkan saldo awal anda!")
+            setor(database["dataRekening"][c])
+            print()
+            print("REKENING BERHASIL DIBUAT")
+            for i in database["dataRekening"][c]:
+                print(i.upper(), database["dataRekening"][c][i])
+            menu(dataUser)
+        else:
+            print("Kode PIN anda Salah!")
+            reg(dataUser)
+    else:
+        print("Gunakan kode PIN yang lain!")
+        reg(dataUser)
+    
 
 client = auth()
 while True:
-    menu(dataUser)
+    menu(client)
