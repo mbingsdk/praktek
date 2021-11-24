@@ -94,7 +94,7 @@ def menu(dataUser):
 def transfer(dataUser):
     print()
     pin = ""
-    nomor = input("Masukkan nomor rekening tujuan")
+    nomor = input("Masukkan nomor rekening tujuan: ")
     for i in database["dataRekening"]:
         if database["dataRekening"][i]["rek"] == nomor:
             pin = i
