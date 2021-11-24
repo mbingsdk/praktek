@@ -3,14 +3,13 @@ KONSEP PROGRAM APLIKASI ATM
 """
 
 #Module
-#import random, livejson
-import random
+import random, json
+from os.path import exists as file_exists
 
 #Nama ATM
 namaATM = "ATM BRO Bersarang"
 
 #Database
-#database = livejson.File('dataATM.json', True, False, 4)
 database = {
     "dataRekening":{
         "123456":{
@@ -27,6 +26,20 @@ database = {
         }
     }
 }
+
+#Load Data
+def loadData():
+    f = open('dataATM.json')
+    data = json.load(f)
+    f.close
+    return data
+
+#Backup data
+def saveData(data):
+    jsonString = json.dumps(data)
+    f = open("dataATM.json", "w")
+    f.write(jsonString)
+    f.close()
 
 #Tahap Authentication / Login
 def auth():
@@ -147,8 +160,12 @@ def reg(dataUser):
     else:
         print("Gunakan kode PIN yang lain!")
         reg(dataUser)
-    
 
+#Load database if database file exist
+if file_exists('dataATM.json'):
+    database = loadData()
+
+#Running Program
 client = auth()
 while True:
     menu(client)
