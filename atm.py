@@ -45,13 +45,22 @@ def saveData(data):
 def auth():
     print()
     print("Masukkan Kartu ATM")
-    pin = input("Masukkan kode PIN: ")
-    daftarPin = [x for x in database["dataRekening"]]
-    if pin in daftarPin:
-        datanya = database["dataRekening"][pin]
-    else:
-        print("Kode PIN yang anda masukkan, SALAH!")
-        auth()
+    x = 3
+    while True:
+        x-=1
+        print()
+        pin = input("Masukkan kode PIN: ")
+        daftarPin = [x for x in database["dataRekening"]]
+        if pin in daftarPin:
+            datanya = database["dataRekening"][pin]
+            break
+        else:
+            if x > 0:
+                print("Kode PIN yang anda masukkan, SALAH!")
+                print("Kesempatan anda sisa", x, "kali!")
+            else:
+                print("ATM anda Terblokir! :v")
+                exit()
     return datanya
 
 #Menu
@@ -101,9 +110,9 @@ def transfer(dataUser):
             print("Semoga uangnya bukan hasil korupsi!")
         else:
             print("Periksa saldomu dulu bos!")
-            transfer(dataUser)
     else:
         print("Nomor rekening tidak terdaftar")
+    saveData(database)
 
 #Penarikan
 def penarikan(dataUser):
@@ -115,7 +124,7 @@ def penarikan(dataUser):
         database["dataRekening"][dataUser["pin"]]["saldo"] -= n
     else:
         print("Periksa saldomu dulu bos!")
-        penarikan(dataUser)
+    saveData(database)
 
 #Setor Tunai
 def setor(dataUser):
@@ -123,6 +132,7 @@ def setor(dataUser):
     n = int(input("Jumlah yang setor: "))
     database["dataRekening"][dataUser["pin"]]["saldo"] += n
     print("Sudah Bos!!")
+    saveData(database)
 
 #Cek Saldo
 def saldo(dataUser):
@@ -153,13 +163,11 @@ def reg(dataUser):
             print("REKENING BERHASIL DIBUAT")
             for i in database["dataRekening"][c]:
                 print(i.upper(), database["dataRekening"][c][i])
-            menu(dataUser)
         else:
             print("Kode PIN anda Salah!")
-            reg(dataUser)
     else:
         print("Gunakan kode PIN yang lain!")
-        reg(dataUser)
+    saveData(database)
 
 #Load database if database file exist
 if file_exists('dataATM.json'):
