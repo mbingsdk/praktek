@@ -4,7 +4,7 @@ KONSEP PROGRAM APLIKASI ATM
 
 #Module
 import random, json
-from os.path import exists as file_exists
+from os.path import exists as fileExists
 
 #Nama ATM
 namaATM = "ATM BRO Bersarang"
@@ -170,7 +170,7 @@ def reg(dataUser):
     saveData(database)
 
 #Load database if database file exist
-if file_exists('dataATM.json'):
+if fileExists('dataATM.json'):
     database = loadData()
 
 #Running Program
