@@ -27,6 +27,15 @@ database = {
     }
 }
 
+def rp(uang):
+    uang = str(uang)
+    if len(uang) <= 3 :
+        return 'Rp ' + uang 
+    else :
+        end3 = uang[-3:]
+        sisa = uang[:-3]
+        return rp(sisa) + '.' + end3
+
 #Load Data
 def loadData():
     f = open('dataATM.json')
@@ -94,7 +103,7 @@ def menu(dataUser):
 def transfer(dataUser):
     print()
     pin = ""
-    nomor = input("Masukkan nomor rekening tujuan: ")
+    nomor = input("Masukkan nomor rekening tujuan")
     for i in database["dataRekening"]:
         if database["dataRekening"][i]["rek"] == nomor:
             pin = i
@@ -138,7 +147,7 @@ def setor(dataUser):
 def saldo(dataUser):
     saldonya = database["dataRekening"][dataUser["pin"]]["saldo"]
     print()
-    print("Jumlah saldo anda:", saldonya)
+    print("Jumlah saldo anda:", rp(saldonya))
     print("Jangan Lupa Sedekah, Chips 5B")
 
 #Registrasi
