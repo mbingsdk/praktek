@@ -191,6 +191,7 @@ def pembayaranToko(total):
         print("|| Kembali :", rp(0))
         print("="*25)
         x["saldo"] -= total
+        saveData(database, "dataATM.json")
     else:
         print("Saldo tidak cukup!")
 
