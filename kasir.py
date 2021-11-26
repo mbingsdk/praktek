@@ -80,9 +80,13 @@ def removeBarang():
 
 #fungsi menampilkan data barang
 def daftarBarang():
-    print("\nID", " "*3, "Nama Barang", " "*3, "Harga")
+    print()
+    print("="*40)
+    print("ID", " "*4, "Nama Barang", " "*10, "Harga")
+    print("-"*40)
     for i in range(len(barang)):
-        print(barang[i]["id"], " "*3, barang[i]["nama"], " "*3, rp(barang[i]["harga"]))
+        print(barang[i]["id"], " "*(6-len(str(i))), barang[i]["nama"], " "*(21-len(barang[i]["nama"])), rp(barang[i]["harga"]))
+    print("="*40)
 
 #fungsi menghitung data belanja
 def belanja():
@@ -135,6 +139,10 @@ def pembayaran(total):
     else:
         pass
     saveData(barang, "gudang.json")
+    print()
+    print("-"*30)
+    print("Kurang banyak!")
+    exit()
 
 #fungsi menu
 def menu():
