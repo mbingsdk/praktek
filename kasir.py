@@ -82,7 +82,7 @@ def removeBarang():
 def daftarBarang():
     print("\nID", " "*3, "Nama Barang", " "*3, "Harga")
     for i in range(len(barang)):
-        print(barang[i]["id"], " "*3, barang[i]["nama"], rp(barang[i]["harga"]))
+        print(barang[i]["id"], " "*3, barang[i]["nama"], " "*3, rp(barang[i]["harga"]))
 
 #fungsi menghitung data belanja
 def belanja():
@@ -140,7 +140,7 @@ def pembayaran(total):
 def menu():
     print()
     print("="*25)
-    print("|| Welcome to" namanya)
+    print("|| Welcome to", namanya)
     print("|| Semoga Anda Bukan Maling")
     print("="*25)
     a = ["Belanja", "Tambahkan Barang", "Hapus Barang", "Tambah Stock"]
