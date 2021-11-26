@@ -166,7 +166,9 @@ def menu():
         elif b == 3:
             tambahStock()
         else:
-            exit()
+            pass
+    else:
+        exit()
 
 #Loading database
 if fileExists('gudang.json'):
