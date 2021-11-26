@@ -81,12 +81,12 @@ def removeBarang():
 #fungsi menampilkan data barang
 def daftarBarang():
     print()
-    print("="*40)
-    print("ID", " "*4, "Nama Barang", " "*10, "Harga")
-    print("-"*40)
+    print("="*50)
+    print("ID", " "*2, "Nama Barang", " "*10, "Stock", " "*2, "Harga")
+    print("-"*50)
     for i in range(len(barang)):
-        print(barang[i]["id"], " "*(6-len(str(i))), barang[i]["nama"], " "*(21-len(barang[i]["nama"])), rp(barang[i]["harga"]))
-    print("="*40)
+        print(barang[i]["id"], " "*(4-len(str(i))), barang[i]["nama"], " "*(21-len(barang[i]["nama"])), barang[i]["stock"], " "*(7-len(str(barang[i]["stock"]))), rp(barang[i]["harga"]))
+    print("="*50)
 
 #fungsi menghitung data belanja
 def belanja():
